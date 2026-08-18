@@ -1,5 +1,6 @@
 package com.azuryn.commerce.controller;
 
+import com.azuryn.commerce.dto.HelloResponse;
 import com.azuryn.commerce.service.HelloService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ public class HelloController {
     }
 
     @GetMapping("/hello")
-    public String hello() {
+    public HelloResponse hello() {
         return helloService.getHelloMessage();
     }
 }
