@@ -22,6 +22,8 @@ public class ProductRequest {
     @PositiveOrZero(message = "Product stock cannot be negative")
     private Integer stock;
 
+    private Long categoryId;
+
     public ProductRequest() {
     }
 
@@ -55,5 +57,13 @@ public class ProductRequest {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 }

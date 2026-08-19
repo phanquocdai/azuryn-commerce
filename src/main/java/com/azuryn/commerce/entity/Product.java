@@ -6,6 +6,9 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import com.azuryn.commerce.entity.Category;
 
 @Entity
 @Table(name = "products")
@@ -22,6 +25,10 @@ public class Product {
     private BigDecimal price;
 
     private Integer stock;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     public Product() {
     }
@@ -60,6 +67,14 @@ public class Product {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
 }
