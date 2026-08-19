@@ -1,5 +1,9 @@
 package com.azuryn.commerce.controller;
 
+import com.azuryn.commerce.dto.HelloRequest;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import com.azuryn.commerce.dto.HelloResponse;
 import com.azuryn.commerce.service.HelloService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +20,8 @@ public class HelloController {
         this.helloService = helloService;
     }
 
-    @GetMapping("/hello")
-    public HelloResponse hello() {
-        return helloService.getHelloMessage();
+    @PostMapping("/hello")
+    public HelloResponse hello(@Valid @RequestBody HelloRequest request) {
+        return helloService.getHelloMessage(request);
     }
 }
