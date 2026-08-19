@@ -7,6 +7,10 @@ import com.azuryn.commerce.dto.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import java.util.Map;
 import java.util.stream.Collectors;
+import com.azuryn.commerce.exception.ProductNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -30,5 +34,17 @@ public class GlobalExceptionHandler {
                 errors
         );
         return ResponseEntity.badRequest().body(errorResponse);
+    }
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleProductNotFound(
+            ProductNotFoundException ex
+    ) {
+        ErrorResponse response = new ErrorResponse(
+                404,
+                ex.getMessage(),
+                Map.of()
+        );
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
     }
 }

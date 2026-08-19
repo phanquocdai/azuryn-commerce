@@ -1,33 +1,28 @@
-package com.azuryn.commerce.entity;
+package com.azuryn.commerce.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+
 import java.math.BigDecimal;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 
-@Entity
-@Table(name = "products")
-public class Product {
+public class ProductRequest {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @NotBlank(message = "Product name is required")
     private String name;
 
     private String description;
 
+    @NotNull(message = "Product price is required")
+    @Positive(message = "Product price must be greater than 0")
     private BigDecimal price;
 
+    @NotNull(message = "Product stock is required")
+    @PositiveOrZero(message = "Product stock cannot be negative")
     private Integer stock;
 
-    public Product() {
-    }
-
-    public Long getId() {
-        return id;
+    public ProductRequest() {
     }
 
     public String getName() {
@@ -61,5 +56,4 @@ public class Product {
     public void setStock(Integer stock) {
         this.stock = stock;
     }
-
 }
