@@ -69,4 +69,11 @@ public class CategoryService {
                 updatedCategory.getDescription()
         );
     }
+    public void deleteCategory(Long id) {
+
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new CategoryNotFoundException(id));
+
+        categoryRepository.delete(category);
+    }
 }

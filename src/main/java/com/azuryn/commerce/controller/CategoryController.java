@@ -6,6 +6,7 @@ import com.azuryn.commerce.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/v1/categories")
@@ -37,5 +38,10 @@ public class CategoryController {
             @Valid @RequestBody CategoryRequest request
     ) {
         return categoryService.updateCategory(id, request);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
+        categoryService.deleteCategory(id);
+        return ResponseEntity.noContent().build();
     }
 }
