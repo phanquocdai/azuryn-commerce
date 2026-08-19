@@ -53,4 +53,20 @@ public class CategoryService {
                 category.getDescription()
         );
     }
+    public CategoryResponse updateCategory(Long id, CategoryRequest request) {
+
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new CategoryNotFoundException(id));
+
+        category.setName(request.getName());
+        category.setDescription(request.getDescription());
+
+        Category updatedCategory = categoryRepository.save(category);
+
+        return new CategoryResponse(
+                updatedCategory.getId(),
+                updatedCategory.getName(),
+                updatedCategory.getDescription()
+        );
+    }
 }
